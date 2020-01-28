@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReposComponent } from './repos/repos.component';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
-import {MatListModule} from '@angular/material';
+import {MatFormFieldModule, MatInputModule, MatListModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -12,7 +13,10 @@ import {RouterModule} from '@angular/router';
   imports: [
     CommonModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 export class ReposModule { }

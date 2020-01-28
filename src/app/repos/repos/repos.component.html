@@ -1,9 +1,16 @@
 <div class="container">
   <h1>Repositories</h1>
 
+  <mat-form-field class="example-full-width">
+    <input [formControl]="filter" matInput placeholder="Type repository name">
+  </mat-form-field>
+
   <mat-nav-list>
-    <a mat-list-item [routerLink]="['/repos', repo.id]" *ngFor="let repo of (repos | async)">
-      {{repo.name}}
+    <a mat-list-item matLine [routerLink]="['/repos', repo.id]" *ngFor="let repo of (reposFiltered | async)">
+      <h3 matLine>{{repo.name}}</h3>
+      <p matLine>{{repo.description}}</p>
+      <p matLine class="caption">{{repo.updated_at | date}}</p>
     </a>
   </mat-nav-list>
 </div>
+
