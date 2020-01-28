@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ReposService} from '../repos.service';
+import {Repo} from './repos';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-repos',
@@ -6,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./repos.component.scss']
 })
 export class ReposComponent implements OnInit {
+  repos: Observable<Repo[]>;
 
-  constructor() { }
+  constructor(reposService: ReposService) {
+    this.repos = reposService.getRepos();
+  }
 
   ngOnInit() {
   }
