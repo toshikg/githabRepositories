@@ -1,3 +1,9 @@
-<div class="container">
-  {{repo | async | json}}
+<div *ngIf="repo$ | async as repo">
+  <h1>{{repo.name}}</h1>
+  <p>
+    {{repo.description}}
+  </p>
+  <p>
+    <a [href]="getArchiveLink(repo)">Download Zip</a>
+  </p>
 </div>

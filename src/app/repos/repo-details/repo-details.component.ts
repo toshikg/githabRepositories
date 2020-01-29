@@ -10,7 +10,7 @@ import {Repo} from '../repos/repos';
   styleUrls: ['./repo-details.component.scss']
 })
 export class RepoDetailsComponent implements OnInit {
-  private repo: Observable<Repo>;
+  private repo$: Observable<Repo>;
 
   constructor(
     private reposService: ReposService,
@@ -21,7 +21,11 @@ export class RepoDetailsComponent implements OnInit {
 
   ngOnInit() {
     const repoId = parseInt(this.route.snapshot.params.id, 0);
-    this.repo = this.reposService.getRepoById(repoId);
+    this.repo$ = this.reposService.getRepoById(repoId);
+  }
+
+  getArchiveLink(repo: Repo) {
+    return `https://github.com/${repo.owner.login}/${repo.name}/archive/master.zip`;
   }
 
 }
