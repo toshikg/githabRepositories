@@ -4,6 +4,9 @@
     {{repo.description}}
   </p>
   <p>
+    <app-edit-text (save)="save($event, repo)" [text]="repo.description"></app-edit-text>
+  </p>
+  <p>
     <a [href]="getArchiveLink(repo)">Download Zip</a>
   </p>
 </div>

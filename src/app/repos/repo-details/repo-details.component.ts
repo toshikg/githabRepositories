@@ -28,4 +28,10 @@ export class RepoDetailsComponent implements OnInit {
     return `https://github.com/${repo.owner.login}/${repo.name}/archive/master.zip`;
   }
 
+  save(description, repo: Repo) {
+    const updatedRepo = {...repo, description};
+
+    this.reposService.updateRepo(repo.id, updatedRepo).subscribe();
+  }
+
 }

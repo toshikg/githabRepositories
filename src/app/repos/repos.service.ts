@@ -47,4 +47,10 @@ export class ReposService {
       return this.fetchRepo(id);
     }
   }
+
+  updateRepo(id: number, data: Repo) {
+    const url = `${this.api}/repositories/${id}`;
+
+    return this.http.patch<Repo>(url, data);
+  }
 }
