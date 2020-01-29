@@ -1,9 +1,24 @@
 <div class="container">
   <h1>Repositories</h1>
 
-  <mat-form-field class="example-full-width">
-    <input [formControl]="filter" matInput placeholder="Type repository name">
-  </mat-form-field>
+  <div class="content"
+       fxLayout="row"
+       fxLayout.xs="column"
+       fxFlexFill >
+
+    <div fxFlex="30" class="sec1">
+      <mat-form-field class="example-full-width">
+        <input [formControl]="filterCtrl" matInput placeholder="Type repository name">
+      </mat-form-field>
+    </div>
+    <div fxFlex="20" class="sec2" >
+      <mat-select placeholder="Sorting" [formControl]="sortingCtrl">
+        <mat-option *ngFor="let sort of sorting" [value]="sort">
+          {{sortNames[sort]}}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
 
   <mat-nav-list>
     <a mat-list-item matLine [routerLink]="['/repos', repo.id]" *ngFor="let repo of (reposFiltered | async)">
