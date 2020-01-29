@@ -12,7 +12,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const reqEdited = req.clone({
       setHeaders: {
-        Authorization: 'Bearer 0a1a44145fa80f4e41481a5f689966bdf2785ec3'
+        Authorization: 'Bearer 7b69c427a5a3fdeecd669f0930b2c01095f84657'
       }
     });
 
