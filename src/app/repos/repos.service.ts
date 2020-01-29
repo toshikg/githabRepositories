@@ -59,6 +59,12 @@ export class ReposService {
     );
   }
 
+  getReadme(id: number) {
+    const url = `${this.api}/repositories/${id}/readme`;
+
+    return this.http.get(url);
+  }
+
   saveDescToLocalStorage(repoId, text) {
     const descStrObj = localStorage.getItem('description');
     const descObj = descStrObj ? JSON.parse(descStrObj) : {};

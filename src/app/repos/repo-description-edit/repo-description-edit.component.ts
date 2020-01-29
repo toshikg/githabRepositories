@@ -20,16 +20,17 @@ export class RepoDescriptionEditComponent implements OnInit {
 
   onSave() {
     this.save.emit(this.textCtrl.value);
-    localStorage.removeItem('description');
+    this.reposService.saveDescToLocalStorage(this.repoId, '');
   }
 
   onCancel() {
     this.cancel.emit();
-    localStorage.removeItem('description');
+    this.reposService.saveDescToLocalStorage(this.repoId, '');
   }
 
   ngOnInit() {
     this.textCtrl = new FormControl(this.text);
+
 
     this.textCtrl.valueChanges.subscribe((text) => {
       this.reposService.saveDescToLocalStorage(this.repoId, text);

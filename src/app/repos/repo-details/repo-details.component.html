@@ -19,6 +19,12 @@
   <p>
     <mat-error *ngIf="showError">There are a problem occurs wile saving.</mat-error>
   </p>
+
+  <mat-card *ngIf="readme$ | async as readme">
+    <h1>README</h1>
+    {{decode(readme.content)}}
+  </mat-card>
+  <br>
   <p>
     <a [href]="getArchiveLink(repo)">Download Zip</a>
   </p>

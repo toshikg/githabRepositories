@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Repo} from '../repos/repos';
 import {tap} from 'rxjs/operators';
+import * as _base64 from 'base-64';
 
 @Component({
   selector: 'app-repo-details',
@@ -15,6 +16,7 @@ export class RepoDetailsComponent implements OnInit {
   editDescriptionMode = false;
   private showError: boolean;
   private unsavedVersion: string;
+  private readme$: Observable<any>;
 
   constructor(
     private reposService: ReposService,
@@ -34,6 +36,8 @@ export class RepoDetailsComponent implements OnInit {
         }
       })
     );
+
+    this.readme$ = this.reposService.getReadme(repoId);
   }
 
   getArchiveLink(repo: Repo) {
@@ -59,6 +63,10 @@ export class RepoDetailsComponent implements OnInit {
 
   editDescription() {
     this.editDescriptionMode = true;
+  }
+
+  decode(str) {
+    return _base64.decode(str);
   }
 
 }
