@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReposModule} from './repos/repos.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HttpInterceptorService} from './http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {HttpClientModule} from '@angular/common/http';
     ReposModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
