@@ -13,7 +13,7 @@ export class RepoDescriptionEditComponent implements OnInit {
   @Input() repoId: number;
   @Output() save = new EventEmitter<string>();
   @Output() cancel = new EventEmitter<void>();
-  private textCtrl: FormControl;
+  textCtrl: FormControl;
 
   constructor(private reposService: ReposService) {
   }

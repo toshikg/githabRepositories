@@ -12,11 +12,11 @@ import * as _base64 from 'base-64';
   styleUrls: ['./repo-details.component.scss']
 })
 export class RepoDetailsComponent implements OnInit {
-  private repo$: Observable<Repo>;
+  repo$: Observable<Repo>;
   editDescriptionMode = false;
-  private showError: boolean;
-  private unsavedVersion: string;
-  private readme$: Observable<any>;
+  showError: boolean;
+  unsavedVersion: string;
+  readme$: Observable<any>;
 
   constructor(
     private reposService: ReposService,

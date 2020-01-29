@@ -13,8 +13,8 @@ import * as _orderBy from 'lodash/orderBy';
 })
 export class ReposComponent implements OnInit {
   repos: Observable<Repo[]>;
-  private filterCtrl: FormControl;
-  private reposFiltered: Observable<Repo[]>;
+  filterCtrl: FormControl;
+  reposFiltered: Observable<Repo[]>;
   sorting: string[];
   sortNames = {
     DATE_ASC: 'Date ASC',
@@ -22,7 +22,7 @@ export class ReposComponent implements OnInit {
     TITLE_ASC: 'Title ASC',
     TITLE_DESC: 'Title DESC',
   };
-  private sortingCtrl: FormControl;
+  sortingCtrl: FormControl;
 
   constructor(reposService: ReposService) {
     this.repos = reposService.getRepos();
