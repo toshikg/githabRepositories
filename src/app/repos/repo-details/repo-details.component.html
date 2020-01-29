@@ -7,10 +7,14 @@
      (click)="editDescription()">
     {{repo.description}}
   </p>
+  <p>
+    <mat-error *ngIf="unsavedVersion">You have unsaved description.</mat-error>
+  </p>
   <p *ngIf="editDescriptionMode">
     <app-edit-text (save)="save($event, repo)"
                    (cancel)="closeEditMode()"
-                   [text]="repo.description"></app-edit-text>
+                   [repoId]="repo.id"
+                   [text]="unsavedVersion || repo.description"></app-edit-text>
   </p>
   <p>
     <mat-error *ngIf="showError">There are a problem occurs wile saving.</mat-error>

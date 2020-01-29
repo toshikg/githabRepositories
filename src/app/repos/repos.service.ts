@@ -58,4 +58,16 @@ export class ReposService {
       })
     );
   }
+
+  saveDescToLocalStorage(repoId, text) {
+    const descStrObj = localStorage.getItem('description');
+    const descObj = descStrObj ? JSON.parse(descStrObj) : {};
+    descObj[repoId] = text;
+    localStorage.setItem('description', JSON.stringify(descObj));
+  }
+
+  getDescFromLocalStorage(repoId) {
+    const descObj = JSON.parse(localStorage.getItem('description')) || {};
+    return descObj[repoId];
+  }
 }

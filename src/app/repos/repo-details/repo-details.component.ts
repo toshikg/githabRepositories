@@ -3,6 +3,7 @@ import {ReposService} from '../repos.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Repo} from '../repos/repos';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-repo-details',
@@ -13,6 +14,7 @@ export class RepoDetailsComponent implements OnInit {
   private repo$: Observable<Repo>;
   editDescriptionMode = false;
   private showError: boolean;
+  private unsavedVersion: string;
 
   constructor(
     private reposService: ReposService,
@@ -23,7 +25,15 @@ export class RepoDetailsComponent implements OnInit {
 
   ngOnInit() {
     const repoId = parseInt(this.route.snapshot.params.id, 0);
-    this.repo$ = this.reposService.getRepoById(repoId);
+    this.repo$ = this.reposService.getRepoById(repoId).pipe(
+      tap((repo) => {
+        this.unsavedVersion = this.reposService.getDescFromLocalStorage(repo.id);
+
+        if (this.unsavedVersion) {
+          this.editDescriptionMode = true;
+        }
+      })
+    );
   }
 
   getArchiveLink(repo: Repo) {
@@ -36,6 +46,7 @@ export class RepoDetailsComponent implements OnInit {
     this.reposService.updateRepo(repo.id, updatedRepo).subscribe(() => {
       this.closeEditMode();
       this.repo$ = this.reposService.getRepoById(repo.id);
+      this.unsavedVersion = null;
     }, () => {
       this.showError = true;
     });
@@ -43,6 +54,7 @@ export class RepoDetailsComponent implements OnInit {
 
   closeEditMode() {
     this.editDescriptionMode = false;
+    this.unsavedVersion = null;
   }
 
   editDescription() {
