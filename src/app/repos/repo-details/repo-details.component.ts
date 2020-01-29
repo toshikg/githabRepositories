@@ -11,6 +11,8 @@ import {Repo} from '../repos/repos';
 })
 export class RepoDetailsComponent implements OnInit {
   private repo$: Observable<Repo>;
+  editDescriptionMode = false;
+  private showError: boolean;
 
   constructor(
     private reposService: ReposService,
@@ -31,7 +33,20 @@ export class RepoDetailsComponent implements OnInit {
   save(description, repo: Repo) {
     const updatedRepo = {...repo, description};
 
-    this.reposService.updateRepo(repo.id, updatedRepo).subscribe();
+    this.reposService.updateRepo(repo.id, updatedRepo).subscribe(() => {
+      this.closeEditMode();
+      this.repo$ = this.reposService.getRepoById(repo.id);
+    }, () => {
+      this.showError = true;
+    });
+  }
+
+  closeEditMode() {
+    this.editDescriptionMode = false;
+  }
+
+  editDescription() {
+    this.editDescriptionMode = true;
   }
 
 }

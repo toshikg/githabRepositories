@@ -1,12 +1,23 @@
 <div *ngIf="repo$ | async as repo">
   <h1>{{repo.name}}</h1>
-  <p>
+  <p *ngIf="!repo.description && !editDescriptionMode">
+    <button mat-stroked-button (click)="editDescription()">Add Description</button>
+  </p>
+  <p *ngIf="!editDescriptionMode"
+     (click)="editDescription()">
     {{repo.description}}
   </p>
+  <p *ngIf="editDescriptionMode">
+    <app-edit-text (save)="save($event, repo)"
+                   (cancel)="closeEditMode()"
+                   [text]="repo.description"></app-edit-text>
+  </p>
   <p>
-    <app-edit-text (save)="save($event, repo)" [text]="repo.description"></app-edit-text>
+    <mat-error *ngIf="showError">There are a problem occurs wile saving.</mat-error>
   </p>
   <p>
     <a [href]="getArchiveLink(repo)">Download Zip</a>
   </p>
+
+  <a mat-stroked-button [routerLink]="['/repos']">Back: Repositories</a>
 </div>

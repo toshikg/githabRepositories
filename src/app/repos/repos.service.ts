@@ -3,7 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Repo} from './repos/repos';
 import {Observable, of} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +51,11 @@ export class ReposService {
   updateRepo(id: number, data: Repo) {
     const url = `${this.api}/repositories/${id}`;
 
-    return this.http.patch<Repo>(url, data);
+    return this.http.patch<Repo>(url, data).pipe(
+      map((repo) => {
+        this.repos = this.repos.map(r => (r.id === id) ? data : r);
+        return repo;
+      })
+    );
   }
 }
