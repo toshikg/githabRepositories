@@ -4,6 +4,7 @@
     <button mat-stroked-button (click)="editDescription()">Add Description</button>
   </p>
   <p *ngIf="!editDescriptionMode"
+     matTooltip="Click to edit description"
      (click)="editDescription()">
     {{repo.description}}
   </p>

@@ -2,7 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReposComponent } from './repos/repos.component';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatListModule, MatSelectModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule,
+  MatSelectModule,
+  MatTooltipModule
+} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FlexModule} from '@angular/flex-layout';
@@ -22,7 +30,8 @@ import {RepoDescriptionEditComponent} from './repo-description-edit/repo-descrip
     FlexModule,
     MatSelectModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatTooltipModule
   ]
 })
 export class ReposModule { }
