@@ -1,7 +1,7 @@
 <div *ngIf="repo$ | async as repo">
-  <div class="repo-header" fxLayout="row" fxLayout.lt-md="column">
+  <div class="repo-header" fxLayout="row" fxLayout.lt-sm="column">
     <div fxFlex="70"><h1>{{repo.name}}</h1></div>
-    <div fxFlex="30" class="repo-download" ngClass.gt-sm="text-right">
+    <div fxFlex="30" class="repo-download" ngClass.gt-xs="text-right">
       <a mat-button [href]="getArchiveLink(repo)">Download Zip <fa name="download"></fa></a>
     </div>
   </div>

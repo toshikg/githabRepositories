@@ -3,13 +3,13 @@
 
   <div class="content"
        fxLayout="row"
-       fxLayout.md="column">
-    <div fxFlex="30">
+       fxLayout.lt-sm="column">
+    <div fxFlex.gt-md="30">
       <mat-form-field class="field-full-width">
         <input [formControl]="filterCtrl" matInput placeholder="Type repository name">
       </mat-form-field>
     </div>
-    <div fxFlex="20" fxFlexOffset="20px">
+    <div fxFlex.gt-md="20" fxFlexOffset.gt-xs="20px">
       <mat-form-field class="field-full-width">
         <mat-select placeholder="Sorting" [formControl]="sortingCtrl">
           <mat-option *ngFor="let sort of sorting" [value]="sort">
