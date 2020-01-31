@@ -6,12 +6,21 @@ import {Repo} from '../repos/repos';
 import {map, tap} from 'rxjs/operators';
 import * as _base64 from 'base-64';
 
+import * as _marked from 'marked';
+
 @Component({
   selector: 'app-repo-details',
   templateUrl: './repo-details.component.html',
   styleUrls: ['./repo-details.component.scss']
 })
 export class RepoDetailsComponent implements OnInit {
+
+  constructor(
+    private reposService: ReposService,
+    private route: ActivatedRoute
+    ) {
+
+  }
   repo$: Observable<Repo>;
   editDescriptionMode = false;
   showError: boolean;
@@ -21,11 +30,8 @@ export class RepoDetailsComponent implements OnInit {
   private commitsCount$: Observable<number>;
   private releasesCount$: Observable<number>;
 
-  constructor(
-    private reposService: ReposService,
-    private route: ActivatedRoute
-    ) {
-
+  private static decode(str) {
+    return _base64.decode(str);
   }
 
   ngOnInit() {
@@ -82,8 +88,8 @@ export class RepoDetailsComponent implements OnInit {
     this.editDescriptionMode = true;
   }
 
-  decode(str) {
-    return _base64.decode(str);
+  compileMarkdown(data) {
+    return _marked(RepoDetailsComponent.decode(data));
   }
 
 }

@@ -41,7 +41,7 @@
 
   <mat-card *ngIf="readme$ | async as readme">
     <h1>README</h1>
-    {{decode(readme.content)}}
+    <div [innerHTML]="compileMarkdown(readme.content)"></div>
   </mat-card>
   <br>
 
