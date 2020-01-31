@@ -13,8 +13,9 @@ import {
 } from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
-import {FlexModule} from '@angular/flex-layout';
+import {ExtendedModule, FlexModule} from '@angular/flex-layout';
 import {RepoDescriptionEditComponent} from './repo-description-edit/repo-description-edit.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 
 
@@ -32,7 +33,9 @@ import {RepoDescriptionEditComponent} from './repo-description-edit/repo-descrip
     MatButtonModule,
     MatCardModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    AngularFontAwesomeModule,
+    ExtendedModule
   ]
 })
 export class ReposModule { }

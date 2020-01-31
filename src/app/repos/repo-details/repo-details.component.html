@@ -1,9 +1,13 @@
 <div *ngIf="repo$ | async as repo">
-  <div class="repo-header" fxLayout="row">
+  <div class="repo-header" fxLayout="row" fxLayout.lt-md="column">
     <div fxFlex="70"><h1>{{repo.name}}</h1></div>
-    <div fxFlex="30" class="repo-download">
-      <a mat-button [href]="getArchiveLink(repo)">Download Zip <mat-icon svgIcon="thumbs-up"></mat-icon></a>
+    <div fxFlex="30" class="repo-download" ngClass.gt-sm="text-right">
+      <a mat-button [href]="getArchiveLink(repo)">Download Zip <fa name="download"></fa></a>
     </div>
+  </div>
+
+  <div class="mb-20">
+    <mat-divider></mat-divider>
   </div>
 
   <p *ngIf="!repo.description && !editDescriptionMode">
@@ -33,5 +37,9 @@
   </mat-card>
   <br>
 
+  <div class="mb-20">
+    <mat-divider></mat-divider>
+  </div>
   <a mat-stroked-button [routerLink]="['/repos']">Back: Repositories</a>
+
 </div>

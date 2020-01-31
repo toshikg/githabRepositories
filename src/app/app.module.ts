@@ -8,6 +8,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReposModule} from './repos/repos.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpInterceptorService} from './http-interceptor.service';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {HttpInterceptorService} from './http-interceptor.service';
     FlexLayoutModule,
     ReposModule,
     HttpClientModule,
+    AngularFontAwesomeModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },],
   bootstrap: [AppComponent]
