@@ -15,7 +15,7 @@ export class RepoDescriptionEditComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
   textCtrl: FormControl;
 
-  constructor(private reposService: ReposService, private elementRef: ElementRef) {
+  constructor(public reposService: ReposService, private elementRef: ElementRef) {
 
   }
 

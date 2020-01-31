@@ -22,7 +22,7 @@ const repoUpdate = {
   description: 'update'
 };
 
-fdescribe('ReposService', () => {
+describe('ReposService', () => {
   beforeEach(() => {
     repos$ = of([]);
   });
@@ -96,7 +96,7 @@ fdescribe('ReposService', () => {
     reposService.updateRepo(1, repoUpdate);
 
     // @ts-ignore
-    reposService.repos$.pipe(skip(1), take(1)).subscribe((data) => {
+    reposService.repos$.pipe(skip(1)).subscribe((data) => {
       expect(data[0]).toEqual(reposMoc[0]);
     });
   });
