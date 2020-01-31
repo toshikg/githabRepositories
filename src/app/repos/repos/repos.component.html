@@ -4,7 +4,7 @@
   <div class="content"
        fxLayout="row"
        fxLayout.xs="column">
-    <div fxFlex="30" fxFlexOffset="20px" class="sec1">
+    <div fxFlex="30" class="sec1">
       <mat-form-field class="example-full-width" style="width: 100%">
         <input [formControl]="filterCtrl" matInput placeholder="Type repository name">
       </mat-form-field>
@@ -18,11 +18,12 @@
     </div>
   </div>
 
-  <mat-nav-list>
-    <a mat-list-item matLine [routerLink]="['/repos', repo.id]" *ngFor="let repo of (reposFiltered | async)">
-      <h3 matLine>{{repo.name}}</h3>
-      <p matLine>{{repo.description}}</p>
-      <p matLine class="caption">{{repo.updated_at | date}}</p>
-    </a>
-  </mat-nav-list>
+
+  <div class="repos-list" *ngFor="let repo of (reposFiltered | async)">
+    <h3><a class="mat-accent" [routerLink]="['/repos', repo.id]" >{{repo.name}}</a></h3>
+    <p>{{repo.description}}</p>
+    <p class="mat-caption">{{repo.updated_at | date}}</p>
+    <mat-divider></mat-divider>
+  </div>
+
 </div>

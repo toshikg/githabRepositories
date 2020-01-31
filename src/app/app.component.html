@@ -2,11 +2,11 @@
   <div class="content"
        *ngIf="user$ | async as user"
        fxLayout="row">
-    <div fxFlex="20" fxFlexOffset="20px" class="sec1">
+    <div fxFlex="20%">
       <p><img style="width: 100%" [src]="user.avatar_url" alt=""></p>
-      <p class="mat-h3">{{user.login}}</p>
+      <p>Author: <b>{{user.login}}</b></p>
     </div>
-    <div fxFlex="80" fxFlexOffset="20px" class="sec2" >
+    <div fxFlex="80%" fxFlexOffset="20px">
       <router-outlet></router-outlet>
     </div>
   </div>
