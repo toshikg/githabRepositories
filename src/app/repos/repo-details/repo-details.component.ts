@@ -26,9 +26,9 @@ export class RepoDetailsComponent implements OnInit {
   showError: boolean;
   unsavedVersion: string;
   readme$: Observable<any>;
-  private branchesCount$: Observable<number>;
-  private commitsCount$: Observable<number>;
-  private releasesCount$: Observable<number>;
+  branchesCount$: Observable<number>;
+  commitsCount$: Observable<number>;
+  releasesCount$: Observable<number>;
 
   private static decode(str) {
     return _base64.decode(str);
