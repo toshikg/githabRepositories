@@ -12,7 +12,7 @@ export class ReposService {
 
   private api = environment.gitHabUrl;
   private repos$ = new BehaviorSubject([]);
-  private callState = {
+  callState = {
     loading: false,
     loaded: false,
   };
