@@ -31,6 +31,14 @@
     <mat-error *ngIf="showError">There are a problem occurs wile saving.</mat-error>
   </p>
 
+  <p>
+    <mat-chip-list>
+      <mat-chip *ngIf="branchesCount$ | async as branchesCount" color="primary">{{branchesCount}} branch(s)</mat-chip>
+      <mat-chip *ngIf="commitsCount$ | async as commitsCount" color="primary">{{commitsCount}} commit(s)</mat-chip>
+      <mat-chip *ngIf="releasesCount$ | async as releasesCount" color="primary">{{releasesCount}} release(s)</mat-chip>
+    </mat-chip-list>
+  </p>
+
   <mat-card *ngIf="readme$ | async as readme">
     <h1>README</h1>
     {{decode(readme.content)}}

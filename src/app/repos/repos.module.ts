@@ -4,7 +4,7 @@ import { ReposComponent } from './repos/repos.component';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatChipsModule,
   MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatListModule,
@@ -35,7 +35,8 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
     MatTooltipModule,
     MatIconModule,
     AngularFontAwesomeModule,
-    ExtendedModule
+    ExtendedModule,
+    MatChipsModule
   ]
 })
 export class ReposModule { }

@@ -77,6 +77,24 @@ export class ReposService {
     return descObj[repoId];
   }
 
+  getBranches(repoId: number): Observable<any[]> {
+    const url = `${this.api}/repositories/${repoId}/branches`;
+
+    return this.http.get<any>(url);
+  }
+
+  getCommits(repoId: number): Observable<any[]> {
+    const url = `${this.api}/repositories/${repoId}/commits`;
+
+    return this.http.get<any>(url);
+  }
+
+  getReleases(repoId: number): Observable<any[]> {
+    const url = `${this.api}/repositories/${repoId}/releases`;
+
+    return this.http.get<any>(url);
+  }
+
   private updateRepoState(id, data) {
     this.repos$.pipe(
       take(1),

@@ -3,7 +3,7 @@ import {ReposService} from '../repos.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Repo} from '../repos/repos';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import * as _base64 from 'base-64';
 
 @Component({
@@ -17,6 +17,9 @@ export class RepoDetailsComponent implements OnInit {
   showError: boolean;
   unsavedVersion: string;
   readme$: Observable<any>;
+  private branchesCount$: Observable<number>;
+  private commitsCount$: Observable<number>;
+  private releasesCount$: Observable<number>;
 
   constructor(
     private reposService: ReposService,
@@ -27,6 +30,19 @@ export class RepoDetailsComponent implements OnInit {
 
   ngOnInit() {
     const repoId = parseInt(this.route.snapshot.params.id, 0);
+
+    this.branchesCount$ = this.reposService.getBranches(repoId).pipe(
+      map(branches => branches.length)
+    );
+
+    this.commitsCount$ = this.reposService.getCommits(repoId).pipe(
+      map(branches => branches.length)
+    );
+
+    this.releasesCount$ = this.reposService.getReleases(repoId).pipe(
+      map(branches => branches.length)
+    );
+
     this.repo$ = this.reposService.getRepoById(repoId).pipe(
       tap((repo) => {
         if (!repo) { return; }

@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~@angular/material/theming';
+//@import '~@angular/material/theming';
 
-$primary: mat-palette($mat-indigo);
+//$primary: mat-palette($mat-indigo);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -17,11 +17,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 a {
-  color: mat-color($primary, 500);
+  //color: mat-color($primary, 500);
   text-decoration: none;
 
   &:hover {
-    color: mat-color($primary, 400);
+    //color: mat-color($primary, 400);
   }
 }
 
