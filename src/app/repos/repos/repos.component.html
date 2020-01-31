@@ -19,11 +19,16 @@
   </div>
 
 
-  <div class="repos-list" *ngFor="let repo of (reposFiltered | async)">
-    <h3><a class="mat-accent" [routerLink]="['/repos', repo.id]" >{{repo.name}}</a></h3>
-    <p>{{repo.description}}</p>
-    <p class="mat-caption">{{repo.updated_at | date}}</p>
-    <mat-divider></mat-divider>
-  </div>
+  <div *ngIf="(reposFiltered | async) as repos">
+    <div class="repos-list" *ngFor="let repo of repos">
+      <h3><a class="mat-accent" [routerLink]="['/repos', repo.id]" >{{repo.name}}</a></h3>
+      <p>{{repo.description}}</p>
+      <p class="mat-caption">{{repo.updated_at | date}}</p>
+      <mat-divider></mat-divider>
+    </div>
 
+    <p *ngIf="repos?.length === 0 && filterCtrl.value">
+      There are no repositories related to your query
+    </p>
+  </div>
 </div>
