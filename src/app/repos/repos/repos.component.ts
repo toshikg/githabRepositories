@@ -27,12 +27,12 @@ export class ReposComponent implements OnInit {
   constructor(reposService: ReposService) {
     this.repos = reposService.getRepos();
     this.filterCtrl = new FormControl('');
-    this.sortingCtrl = new FormControl('');
+    this.sortingCtrl = new FormControl('DATE_DESC');
 
     this.reposFiltered = combineLatest([
       this.repos,
       this.filterCtrl.valueChanges.pipe(startWith('')),
-      this.sortingCtrl.valueChanges.pipe(startWith(''))
+      this.sortingCtrl.valueChanges.pipe(startWith('DATE_DESC'))
     ]).pipe(
       map(([repos, searchStr, sort]) => {
         const filteredRepos = repos.filter(h => h.name.toLowerCase().includes(searchStr.toLowerCase()));

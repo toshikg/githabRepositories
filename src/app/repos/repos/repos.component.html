@@ -5,16 +5,18 @@
        fxLayout="row"
        fxLayout.xs="column">
     <div fxFlex="30" class="sec1">
-      <mat-form-field class="example-full-width" style="width: 100%">
+      <mat-form-field class="field-full-width">
         <input [formControl]="filterCtrl" matInput placeholder="Type repository name">
       </mat-form-field>
     </div>
     <div fxFlex="20" fxFlexOffset="20px" class="sec2" >
-      <mat-select placeholder="Sorting" [formControl]="sortingCtrl">
-        <mat-option *ngFor="let sort of sorting" [value]="sort">
-          {{sortNames[sort]}}
-        </mat-option>
-      </mat-select>
+      <mat-form-field class="field-full-width">
+        <mat-select placeholder="Sorting" [formControl]="sortingCtrl">
+          <mat-option *ngFor="let sort of sorting" [value]="sort">
+            {{sortNames[sort]}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
 
