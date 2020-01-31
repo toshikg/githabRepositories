@@ -29,6 +29,8 @@ export class RepoDetailsComponent implements OnInit {
     const repoId = parseInt(this.route.snapshot.params.id, 0);
     this.repo$ = this.reposService.getRepoById(repoId).pipe(
       tap((repo) => {
+        if (!repo) { return; }
+
         this.unsavedVersion = this.reposService.getDescFromLocalStorage(repo.id);
 
         if (this.unsavedVersion) {
@@ -49,7 +51,6 @@ export class RepoDetailsComponent implements OnInit {
 
     this.reposService.updateRepo(repo.id, updatedRepo).subscribe(() => {
       this.closeEditMode();
-      this.repo$ = this.reposService.getRepoById(repo.id);
       this.unsavedVersion = null;
     }, () => {
       this.showError = true;

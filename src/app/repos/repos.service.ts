@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Repo} from './repos/repos';
-import {Observable, of} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {map, take, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,11 @@ import {map, tap} from 'rxjs/operators';
 export class ReposService {
 
   private api = environment.gitHabUrl;
-  private repos: Repo[] = [];
+  private repos$ = new BehaviorSubject([]);
+  private callState = {
+    loading: false,
+    loaded: false,
+  };
 
   constructor(private http: HttpClient) {
   }
@@ -23,39 +27,35 @@ export class ReposService {
   }
 
   getRepos(): Observable<Repo[]> {
-    if (this.repos.length === 0) {
+    if (!this.callState.loaded && !this.callState.loading) {
+      this.callState.loading = true;
       return this.fetchRepos().pipe(
-        tap(repos => this.repos = repos)
+        tap(repos => {
+          this.repos$.next(repos);
+          this.callState.loading = false;
+          this.callState.loaded = true;
+        })
       );
     } else {
-      return of(this.repos);
+      return this.repos$;
     }
-  }
-
-  private fetchRepo(id: number): Observable<Repo> {
-    const url = `${this.api}/repositories/${id}`;
-
-    return this.http.get<Repo>(url);
   }
 
   getRepoById(id: number): Observable<Repo> {
-    const repoCached = this.repos.find(r => r.id === id);
-
-    if (repoCached) {
-      return of(repoCached);
-    } else {
-      return this.fetchRepo(id);
+    if (!this.callState.loaded && !this.callState.loading) {
+      this.getRepos().subscribe();
     }
+
+    return this.repos$.pipe(
+      map(repos => repos.find(r => r.id === id))
+    );
   }
 
   updateRepo(id: number, data: Repo) {
     const url = `${this.api}/repositories/${id}`;
 
     return this.http.patch<Repo>(url, data).pipe(
-      map((repo) => {
-        this.repos = this.repos.map(r => (r.id === id) ? data : r);
-        return repo;
-      })
+      tap(() => this.updateRepoState(id, data))
     );
   }
 
@@ -75,5 +75,15 @@ export class ReposService {
   getDescFromLocalStorage(repoId) {
     const descObj = JSON.parse(localStorage.getItem('description')) || {};
     return descObj[repoId];
+  }
+
+  private updateRepoState(id, data) {
+    this.repos$.pipe(
+      take(1),
+      tap(repos => {
+        const reposUpdated = repos.map(r => (r.id === id) ? data : r);
+        this.repos$.next(reposUpdated);
+      })
+    ).subscribe();
   }
 }
