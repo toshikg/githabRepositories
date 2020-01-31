@@ -1,5 +1,11 @@
 <div *ngIf="repo$ | async as repo">
-  <h1>{{repo.name}}</h1>
+  <div class="repo-header" fxLayout="row">
+    <div fxFlex="70"><h1>{{repo.name}}</h1></div>
+    <div fxFlex="30" class="repo-download">
+      <a mat-button [href]="getArchiveLink(repo)">Download Zip <mat-icon svgIcon="thumbs-up"></mat-icon></a>
+    </div>
+  </div>
+
   <p *ngIf="!repo.description && !editDescriptionMode">
     <button mat-stroked-button (click)="editDescription()">Add Description</button>
   </p>
@@ -26,9 +32,6 @@
     {{decode(readme.content)}}
   </mat-card>
   <br>
-  <p>
-    <a [href]="getArchiveLink(repo)">Download Zip</a>
-  </p>
 
   <a mat-stroked-button [routerLink]="['/repos']">Back: Repositories</a>
 </div>

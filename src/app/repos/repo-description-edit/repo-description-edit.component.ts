@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ReposService} from '../repos.service';
 
@@ -15,7 +15,8 @@ export class RepoDescriptionEditComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
   textCtrl: FormControl;
 
-  constructor(private reposService: ReposService) {
+  constructor(private reposService: ReposService, private elementRef: ElementRef) {
+
   }
 
   onSave() {
@@ -31,6 +32,7 @@ export class RepoDescriptionEditComponent implements OnInit {
   ngOnInit() {
     this.textCtrl = new FormControl(this.text);
 
+    this.elementRef.nativeElement.querySelector('textarea').focus();
 
     this.textCtrl.valueChanges.subscribe((text) => {
       this.reposService.saveDescToLocalStorage(this.repoId, text);

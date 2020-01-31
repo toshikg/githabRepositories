@@ -5,7 +5,7 @@ import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import {
   MatButtonModule,
   MatCardModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatListModule,
   MatSelectModule,
@@ -31,7 +31,8 @@ import {RepoDescriptionEditComponent} from './repo-description-edit/repo-descrip
     MatSelectModule,
     MatButtonModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatIconModule
   ]
 })
 export class ReposModule { }

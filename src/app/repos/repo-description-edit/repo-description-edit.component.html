@@ -1,7 +1,7 @@
 <div>
   <mat-card>
     <mat-form-field style="width: 100%">
-      <textarea style="height: 50px" [formControl]="textCtrl" matInput placeholder="Edit description"></textarea>
+      <textarea [formControl]="textCtrl" matInput mat-autosize placeholder="Edit description"></textarea>
     </mat-form-field>
 
     <button mat-button color="primary" (click)="onCancel()">Cancel</button>
